@@ -1,1 +1,209 @@
+<!DOCTYPE html>
 
+<html>
+
+<head>
+
+    <title>Online Card Room</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+
+    <!-- HOME -->
+
+    <div id="home">
+
+        <h1>🃏 Online Card Room</h1>
+
+        <p>Play card games with your friends!</p>
+
+        <input
+            id="homeName"
+            placeholder="Your name"
+        >
+
+        <button onclick="showCreate()">
+            Create Game
+        </button>
+
+        <button onclick="showJoin()">
+            Join Game
+        </button>
+
+    </div>
+
+
+
+    <!-- CREATE -->
+
+    <div id="create" class="hidden">
+
+        <button onclick="showHome()">
+            ← Back
+        </button>
+
+        <h2>Create Game</h2>
+
+        <input
+            id="createName"
+            placeholder="Your name"
+        >
+
+        <h3>Choose Game</h3>
+
+        <select id="game">
+
+            <option value="Go Fish">
+                Go Fish
+            </option>
+
+            <option value="Snap">
+                Snap
+            </option>
+
+            <option value="Blackjack">
+                Blackjack
+            </option>
+
+        </select>
+
+
+        <h3>Password</h3>
+
+        <input
+            id="password"
+            type="password"
+            placeholder="Game password"
+        >
+
+
+        <h3>Maximum Players</h3>
+
+        <select id="maxPlayers">
+
+            <option value="2">2</option>
+
+            <option value="3">3</option>
+
+            <option value="4" selected>4</option>
+
+            <option value="5">5</option>
+
+            <option value="6">6</option>
+
+            <option value="7">7</option>
+
+            <option value="8">8</option>
+
+        </select>
+
+
+        <button onclick="createGame()">
+            Create Game
+        </button>
+
+    </div>
+
+
+
+    <!-- JOIN -->
+
+    <div id="join" class="hidden">
+
+        <button onclick="showHome()">
+            ← Back
+        </button>
+
+        <h2>Join Game</h2>
+
+        <input
+            id="joinName"
+            placeholder="Your name"
+        >
+
+        <input
+            id="gameCode"
+            placeholder="4 digit game code"
+            maxlength="4"
+        >
+
+        <input
+            id="joinPassword"
+            type="password"
+            placeholder="Game password"
+        >
+
+        <button onclick="joinGame()">
+            Join Game
+        </button>
+
+    </div>
+
+
+
+    <!-- LOBBY -->
+
+    <div id="lobby" class="hidden">
+
+        <h2>Game Lobby</h2>
+
+        <h1 id="roomCode">
+            ----
+        </h1>
+
+        <p>
+            Give this code to your friends.
+        </p>
+
+        <h3>Players</h3>
+
+        <div id="players"></div>
+
+        <button
+            id="startButton"
+            onclick="startGame()"
+        >
+            Start Game
+        </button>
+
+    </div>
+
+
+
+    <!-- GAME -->
+
+    <div id="game" class="hidden">
+
+        <h2 id="gameTitle">
+            Game
+        </h2>
+
+        <div id="gamePlayers"></div>
+
+        <div id="gameTable">
+
+            🎴
+
+        </div>
+
+    </div>
+
+
+    <p id="error"></p>
+
+</div>
+
+
+<script src="/socket.io/socket.io.js"></script>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>
