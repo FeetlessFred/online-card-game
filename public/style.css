@@ -1,0 +1,133 @@
+body {
+
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(
+        135deg,
+        #141e30,
+        #243b55
+    );
+
+    color: white;
+
+    text-align: center;
+
+    min-height: 100vh;
+
+    margin: 0;
+
+}
+
+
+.container {
+
+    width: 90%;
+
+    max-width: 600px;
+
+    margin: auto;
+
+    padding-top: 60px;
+
+}
+
+
+h1 {
+
+    font-size: 45px;
+
+}
+
+
+input,
+select {
+
+    width: 90%;
+
+    padding: 14px;
+
+    margin: 8px;
+
+    border-radius: 10px;
+
+    border: none;
+
+    font-size: 16px;
+
+}
+
+
+button {
+
+    width: 90%;
+
+    padding: 15px;
+
+    margin: 8px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #7c3aed;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+button:hover {
+
+    background: #9333ea;
+
+}
+
+
+.hidden {
+
+    display: none;
+
+}
+
+
+#roomCode {
+
+    font-size: 60px;
+
+    letter-spacing: 10px;
+
+    background: rgba(255,255,255,0.1);
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+}
+
+
+.player {
+
+    background: rgba(255,255,255,0.1);
+
+    padding: 15px;
+
+    margin: 8px;
+
+    border-radius: 10px;
+
+}
+
+
+#error {
+
+    color: #ff6b6b;
+
+    font-weight: bold;
+
+}
