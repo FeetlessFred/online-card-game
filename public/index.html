@@ -1,32 +1,181 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Online Card Room</title>
+    <title>Online Card Game</title>
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #151515;
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            margin-top: 10px;
+        }
+
+        button {
+            border: none;
+            padding: 12px 22px;
+            margin: 8px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        input,
+        select {
+            display: block;
+            width: 280px;
+            max-width: 100%;
+            margin: 10px auto;
+            padding: 12px;
+            border-radius: 7px;
+            border: none;
+            font-size: 16px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .box {
+            background: #242424;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        #roomCode {
+            font-size: 40px;
+            font-weight: bold;
+            letter-spacing: 8px;
+            margin: 20px;
+        }
+
+        .player {
+            background: #333;
+            margin: 8px auto;
+            padding: 12px;
+            border-radius: 8px;
+            max-width: 400px;
+        }
+
+        #error {
+            color: #ff5555;
+            font-weight: bold;
+            min-height: 25px;
+            margin: 15px;
+        }
+
+        /* GAME */
+
+        #gameArea {
+            margin-top: 25px;
+        }
+
+        #discard {
+            min-height: 160px;
+            margin: 20px;
+        }
+
+        .card {
+            width: 100px;
+            height: 145px;
+            background: white;
+            color: black;
+            border-radius: 12px;
+            margin: 8px;
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            user-select: none;
+        }
+
+        .card.red {
+            color: #d00000;
+        }
+
+        .card.clickable {
+            cursor: pointer;
+            transition: transform 0.15s;
+        }
+
+        .card.clickable:hover {
+            transform: translateY(-12px);
+        }
+
+        .cardValue {
+            font-size: 34px;
+        }
+
+        .cardSuit {
+            font-size: 38px;
+        }
+
+        #hand {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-end;
+            min-height: 170px;
+        }
+
+        #turnMessage {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 20px;
+        }
+
+        #gamePlayers {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>
 
 <div class="container">
 
-
-    <!-- HOME -->
+    <!-- ================= HOME ================= -->
 
     <div id="home">
 
-        <h1>🃏 Online Card Room</h1>
+        <h1>🃏 Online Card Game</h1>
 
-        <p>Play card games with your friends!</p>
-
-        <input
-            id="homeName"
-            placeholder="Your name"
-        >
+        <p>Play cards against actual people!</p>
 
         <button onclick="showCreate()">
             Create Game
@@ -39,171 +188,185 @@
     </div>
 
 
-
-    <!-- CREATE -->
+    <!-- ================= CREATE ================= -->
 
     <div id="create" class="hidden">
 
-        <button onclick="showHome()">
-            ← Back
-        </button>
+        <h1>Create Game</h1>
 
-        <h2>Create Game</h2>
+        <div class="box">
 
-        <input
-            id="createName"
-            placeholder="Your name"
-        >
+            <input
+                id="createName"
+                placeholder="Your name"
+            >
 
-        <h3>Choose Game</h3>
+            <select id="game">
 
-        <select id="game">
+                <option value="Classic Card Game">
+                    Classic Card Game
+                </option>
 
-            <option value="Go Fish">
-                Go Fish
-            </option>
+            </select>
 
-            <option value="Snap">
-                Snap
-            </option>
+            <input
+                id="password"
+                type="password"
+                placeholder="Game password"
+            >
 
-            <option value="Blackjack">
-                Blackjack
-            </option>
+            <select id="maxPlayers">
 
-        </select>
+                <option value="2">
+                    2 Players
+                </option>
 
+                <option value="3">
+                    3 Players
+                </option>
 
-        <h3>Password</h3>
+                <option value="4" selected>
+                    4 Players
+                </option>
 
-        <input
-            id="password"
-            type="password"
-            placeholder="Game password"
-        >
+            </select>
 
+            <button onclick="createGame()">
+                Create Game
+            </button>
 
-        <h3>Maximum Players</h3>
-
-        <select id="maxPlayers">
-
-            <option value="2">2</option>
-
-            <option value="3">3</option>
-
-            <option value="4" selected>4</option>
-
-            <option value="5">5</option>
-
-            <option value="6">6</option>
-
-            <option value="7">7</option>
-
-            <option value="8">8</option>
-
-        </select>
-
-
-        <button onclick="createGame()">
-            Create Game
-        </button>
-
-    </div>
-
-
-
-    <!-- JOIN -->
-
-    <div id="join" class="hidden">
-
-        <button onclick="showHome()">
-            ← Back
-        </button>
-
-        <h2>Join Game</h2>
-
-        <input
-            id="joinName"
-            placeholder="Your name"
-        >
-
-        <input
-            id="gameCode"
-            placeholder="4 digit game code"
-            maxlength="4"
-        >
-
-        <input
-            id="joinPassword"
-            type="password"
-            placeholder="Game password"
-        >
-
-        <button onclick="joinGame()">
-            Join Game
-        </button>
-
-    </div>
-
-
-
-    <!-- LOBBY -->
-
-    <div id="lobby" class="hidden">
-
-        <h2>Game Lobby</h2>
-
-        <h1 id="roomCode">
-            ----
-        </h1>
-
-        <p>
-            Give this code to your friends.
-        </p>
-
-        <h3>Players</h3>
-
-        <div id="players"></div>
-
-        <button
-            id="startButton"
-            onclick="startGame()"
-        >
-            Start Game
-        </button>
-
-    </div>
-
-
-
-    <!-- GAME -->
-
-    <div id="game" class="hidden">
-
-        <h2 id="gameTitle">
-            Game
-        </h2>
-
-        <div id="gamePlayers"></div>
-
-        <div id="gameTable">
-
-            🎴
+            <button onclick="showHome()">
+                Back
+            </button>
 
         </div>
 
     </div>
 
 
-    <p id="error"></p>
+    <!-- ================= JOIN ================= -->
+
+    <div id="join" class="hidden">
+
+        <h1>Join Game</h1>
+
+        <div class="box">
+
+            <input
+                id="joinName"
+                placeholder="Your name"
+            >
+
+            <input
+                id="gameCode"
+                placeholder="4-digit game code"
+                maxlength="4"
+            >
+
+            <input
+                id="joinPassword"
+                type="password"
+                placeholder="Game password"
+            >
+
+            <button onclick="joinGame()">
+                Join Game
+            </button>
+
+            <button onclick="showHome()">
+                Back
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= LOBBY ================= -->
+
+    <div id="lobby" class="hidden">
+
+        <h1>Game Lobby</h1>
+
+        <p>Give this code to your friends:</p>
+
+        <div id="roomCode">
+            ----
+        </div>
+
+        <div class="box">
+
+            <h2>Players</h2>
+
+            <div id="players"></div>
+
+            <button
+                id="startButton"
+                onclick="startGame()"
+            >
+                Start Game
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= GAME ================= -->
+
+    <div id="game" class="hidden">
+
+        <h1 id="gameTitle">
+            Card Game
+        </h1>
+
+        <div id="error"></div>
+
+        <div id="turnMessage">
+            Waiting...
+        </div>
+
+        <div class="box">
+
+            <h2>Players</h2>
+
+            <div id="gamePlayers"></div>
+
+        </div>
+
+
+        <div id="gameArea">
+
+            <h2>Discard Pile</h2>
+
+            <div id="discard"></div>
+
+            <button
+                id="drawButton"
+                onclick="drawCard()"
+            >
+                Draw Card
+            </button>
+
+
+            <h2>Your Cards</h2>
+
+            <div id="hand"></div>
+
+        </div>
+
+    </div>
 
 </div>
 
 
+<!-- Socket.IO -->
+
 <script src="/socket.io/socket.io.js"></script>
 
-<script src="app.js"></script>
+<!-- Your game code -->
+
+<script src="/app.js"></script>
 
 </body>
-
 </html>
